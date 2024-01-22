@@ -35,7 +35,10 @@ SECRET_KEY = 'django-insecure-l234v2ww$l%+z8p##2u+=!m*4(z&!jkpfxadx#i2$+2@o9olpq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'jamminbackend-production.up.railway.app',
+    'jammin_backend.railway.internal',
+    ]
 
 
 # Application definition
