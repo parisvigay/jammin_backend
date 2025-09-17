@@ -14,6 +14,7 @@ from datetime import timedelta
 # from django.urls import path
 import environ
 import os
+import dj_database_url
 
 env = environ.Env(
     # set casting, default value
@@ -38,6 +39,8 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'jamminbackend-production.up.railway.app',
     'jammin_backend.railway.internal',
+    'localhost', 
+    '127.0.0.1',
     ]
 
 
@@ -91,28 +94,22 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ['PGDATABASE'],
-        'USER': os.environ['PGUSER'],
-        'PASSWORD': os.environ['PGPASSWORD'],
-        'HOST': os.environ['PGHOST'],
-        'PORT': os.environ['PGPORT']
-    }
-}
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'jammin',
-#         'USER': 'parisvigay',
-#         'PASSWORD': '',
-#         'HOST': '127.0.0.1',
-#         'PORT': '5432'
+#         'NAME': os.environ['PGDATABASE'],
+#         'USER': os.environ['PGUSER'],
+#         'PASSWORD': os.environ['PGPASSWORD'],
+#         'HOST': os.environ['PGHOST'],
+#         'PORT': os.environ['PGPORT']
 #     }
 # }
 
+DATABASES = {
+    'default': dj_database_url.config(
+        default=os.environ.get("DATABASE_URL")
+    )
+}
 
 
 # Password validation
@@ -173,5 +170,6 @@ SIMPLE_JWT = {
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
+    'http://localhost:8000',
     'https://jammin.up.railway.app',
 ]
